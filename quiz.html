@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Quiz de Mitologia Grega</title>
+    <link rel="stylesheet" href="estilo.css" />
+  </head>
+  
+  <body>
+    <div>
+        <div>
+      <h1>Quiz de Mitologia Grega</h1>
+      <h4>As 10 primeiras são fáceis e as outras 10 são difíceis!!!</h4>
+      <div class="quiz-container">
+        <div class="question" id="question"></div>
+        <div class="options">
+          <button onclick="checkAnswer(0)" id="btn0"></button>
+          <button onclick="checkAnswer(1)" id="btn1"></button>
+          <button onclick="checkAnswer(2)" id="btn2"></button>
+          <button onclick="checkAnswer(3)" id="btn3"></button>
+        </div>
+        <div class="result" id="result"></div>
+        <div id="progress"></div>
+      </div>
+    </div>
+</div>
+    <script>
+      const quiz = [
+        {
+          pergunta: "Qual o Deus do trovão?",
+          opcoes: ["Zeus", "Apolo", "Poseidon", "Ares"],
+          correta: 0
+        },
+        {
+          pergunta: "Quem matou Medusa?",
+          opcoes: ["Aquiles", "Hércules", "Perseu", "Teseu"],
+          correta: 2
+        },
+        {
+          pergunta: "Quem é o deus do vinho?",
+          opcoes: ["Zeus", "Apolo", "Hermes", "Dionísio"],
+          correta: 3
+        },
+        {
+          pergunta: "Animal símbolo de Atena?",
+          opcoes: ["Coruja", "Águia", "Cavalo", "Corvo"],
+          correta: 0
+        },
+        {
+          pergunta: "Onde moram os Deuses?",
+          opcoes: [
+            "Monte Everest",
+            "Monte Etna",
+            "Monte Olimpo",
+            "Monte Sinai"
+          ],
+          correta: 2
+        },
+        {
+          pergunta: "Herói dos Doze Trabalhos?",
+          opcoes: ["Perseu", "Hércules", "Aquiles", "Teseu"],
+          correta: 1
+        },
+        {
+          pergunta: "Deus do submundo?",
+          opcoes: ["Hades", "Zeus", "Poseidon", "Hermes"],
+          correta: 0
+        },
+        {
+          pergunta: "Deusa da sabedoria?",
+          opcoes: ["Ártemis", "Afrodite", "Hera", "Atena"],
+          correta: 3
+        },
+        {
+          pergunta: "Deus do mar?",
+          opcoes: ["Ares", "Apolo", "Hades", "Poseidon"],
+          correta: 3
+        },
+        {
+          pergunta: "Deus do fogo e metalurgia?",
+          opcoes: ["Ares", "Hefesto", "Hermes", "Zeus"],
+          correta: 1
+        },
+        {
+          pergunta: "Deus mensageiro?",
+          opcoes: ["Ares", "Apolo", "Hermes", "Zeus"],
+          correta: 2
+        },
+        {
+          pergunta: "Deus da guerra?",
+          opcoes: ["Ares", "Hércules", "Kratos", "Aquiles"],
+          correta: 0
+        },
+        {
+          pergunta: "Deusa da caça?",
+          opcoes: ["Ártemis", "Afrodite", "Hera", "Atena"],
+          correta: 0
+        },
+        {
+          pergunta: "Deus da profecia e música?",
+          opcoes: ["Hades", "Hermes", "Zeus", "Apolo"],
+          correta: 3
+        },
+        {
+          pergunta: "Deusa do amor e beleza?",
+          opcoes: ["Artemis", "Atena", "Hera", "Afrodite"],
+          correta: 3
+        },
+        {
+          pergunta: "Quem foi mãe de Perseu?",
+          opcoes: ["Afrodite", "Danae", "Hera", "Ártemis"],
+          correta: 1
+        },
+        {
+          pergunta: "Quem guiava as almas ao Hades?",
+          opcoes: ["Hermes", "Ares", "Apolo", "Dionísio"],
+          correta: 0
+        },
+        {
+          pergunta: "Quem puniu Prometeu?",
+          opcoes: ["Ares", "Hades", "Zeus", "Poseidon"],
+          correta: 2
+        },
+        {
+          pergunta: "Monstro com corpo de leão e cauda de serpente?",
+          opcoes: ["Minotauro", "Quimera", "Hidra", "Grifo"],
+          correta: 1
+        },
+        {
+          pergunta: "Quem era o guardião do labirinto?",
+          opcoes: ["Centauro", "Minotauro", "Cérbero", "Harpia"],
+          correta: 1
+        }
+      ];
+
+      let index = 0;
+      let pontos = 0;
+
+      function carregarPergunta() {
+        if (index >= quiz.length) {
+          document.getElementById("question").innerText = "Fim do quiz!";
+          document.querySelector(".options").style.display = "none";
+          document.getElementById(
+            "result"
+          ).innerText = `Você acertou ${pontos} de ${quiz.length}`;
+          document.getElementById("progress").innerText = "";
+          return;
+        }
+
+        const atual = quiz[index];
+        document.getElementById("question").innerText = atual.pergunta;
+        atual.opcoes.forEach((op, i) => {
+          document.getElementById(`btn${i}`).innerText = op;
+        });
+        document.getElementById("progress").innerText = `Pergunta ${
+          index + 1
+        } de ${quiz.length}`;
+      }
+
+      function checkAnswer(resposta) {
+        const correta = quiz[index].correta;
+        if (resposta === correta) {
+          document.getElementById("result").innerText = "Correto!";
+          document.getElementById("result").style.color = "green";
+          pontos++;
+        } else {
+          document.getElementById("result").innerText = "Errado!";
+          document.getElementById("result").style.color = "red";
+        }
+        index++;
+        setTimeout(() => {
+          document.getElementById("result").innerText = "";
+          carregarPergunta();
+        }, 1000);
+      }
+
+      carregarPergunta();
+    </script>
+  </body>
+</html>
